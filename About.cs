@@ -37,5 +37,16 @@ namespace IPgrab
                 }
             };
         }
-    }
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+            this.Close();
+		}
+
+		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			this.linkLabel1.LinkVisited = true;
+			System.Diagnostics.Process.Start("https://github.com/NotSnorlax/IP-Info#readme");
+		}
+	}
 }

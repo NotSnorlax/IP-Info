@@ -76,7 +76,11 @@ namespace IPgrab
                     timezone.Text = info.timezone;
                     readme.Text = info.readme;
 
-                } catch { }
+                } catch {
+					label2.Text = "Connection failed to: " + textBox1.Text;
+
+					textBox1.Enabled = true;
+				}
             }
         }
 
