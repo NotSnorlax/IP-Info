@@ -139,6 +139,12 @@ namespace IPgrab
         {
             System.Windows.Forms.Clipboard.SetText("IP: " + ip.Text + "\r\nAnycast: " + anycast.Text + "\r\nCity: " + city.Text + "\r\nRegion: " + region.Text + "\r\nCountry: " + country.Text + "\r\nLoc: " + loc.Text + "\r\nOrg: " + org.Text + "\r\nPostal: " + postal.Text + "\r\nTimezone: " + timezone.Text + "\r\nReadme:" + readme.Text);
         }
+
+        private void Form1_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+            About about = new About();
+            about.Show();
+        }
     }
     public class Data
     {
