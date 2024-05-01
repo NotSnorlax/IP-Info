@@ -45,8 +45,26 @@ namespace IPgrab
             label2.Text = "Connecting to: " + textBox1.Text;
             try
             {
-
-                label2.Text = "Grabbed: " + textBox1.Text;
+				string url = $"https://ipinfo.io/{textBox1.Text}/json";
+				using (HttpClient http = new HttpClient())
+				{
+					
+					HttpResponseMessage message = await http.GetAsync(url);
+					message.EnsureSuccessStatusCode();
+					string mesData = await message.Content.ReadAsStringAsync();
+					Data info = JsonConvert.DeserializeObject<Data>(mesData);
+					ip.Text = info.ip;
+					anycast.Text = info.anycast;
+					city.Text = info.city;
+					region.Text = info.region;
+					country.Text = info.country;
+					loc.Text = info.loc;
+					org.Text = info.org;
+					postal.Text = info.postal;
+					timezone.Text = info.timezone;
+                    readme.Text = info.readme;
+				}
+				label2.Text = "Grabbed: " + textBox1.Text;
                 textBox1.Enabled = true;
             }
             catch
@@ -56,32 +74,6 @@ namespace IPgrab
                 textBox1.Enabled = true;
             }
             textBox1.Enabled = true;
-            string url = $"https://ipinfo.io/{textBox1.Text}/json";
-            using (HttpClient http = new HttpClient())
-            {
-                try
-                {
-                    HttpResponseMessage message = await http.GetAsync(url);
-                    message.EnsureSuccessStatusCode();
-                    string mesData = await message.Content.ReadAsStringAsync();
-                    Data info = JsonConvert.DeserializeObject<Data>(mesData);
-                    ip.Text = info.ip;
-                    anycast.Text = info.anycast;
-                    city.Text = info.city;
-                    region.Text = info.region;
-                    country.Text = info.country;
-                    loc.Text = info.loc;
-                    org.Text = info.org;
-                    postal.Text = info.postal;
-                    timezone.Text = info.timezone;
-                    readme.Text = info.readme;
-
-                } catch {
-					label2.Text = "Connection failed to: " + textBox1.Text;
-
-					textBox1.Enabled = true;
-				}
-            }
         }
 
         private void button3_Click(object sender, EventArgs e)
